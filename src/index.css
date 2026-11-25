@@ -1,0 +1,119 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Design tokens mapped 1:1 from .stitch/DESIGN.md */
+@layer base {
+  :root {
+    --font-editorial: "Newsreader", "Cormorant Garamond", Georgia, serif;
+    --font-sans: "Inter Tight", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+
+    /* Archival Paper (Default) */
+    --surface-primary: #f5f2eb;
+    --surface-elevated: #faf8f4;
+    --surface-linen: #ebe6dc;
+    --text-primary: #141412;
+    --text-secondary: #383530;
+    --text-muted: #646057;
+    --action-primary: #9e1b32;
+    --accent-science: #265340;
+    --border-hairline: rgba(20, 20, 18, 0.14);
+    --border-strong: rgba(20, 20, 18, 0.85);
+  }
+
+  .dark {
+    /* Warm Obsidian Monograph (No blue-slate tint) */
+    --surface-primary: #111110;
+    --surface-elevated: #181715;
+    --surface-linen: #201f1c;
+    --text-primary: #f0ece4;
+    --text-secondary: #c9c3b8;
+    --text-muted: #8f8a80;
+    --action-primary: #d9465f;
+    --accent-science: #5ca483;
+    --border-hairline: rgba(240, 236, 228, 0.14);
+    --border-strong: rgba(240, 236, 228, 0.78);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+    background-color: var(--surface-primary);
+    color: var(--text-primary);
+    font-feature-settings: "kern" 1, "liga" 1;
+  }
+
+  body {
+    background-color: var(--surface-primary);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    transition: background-color 0.35s cubic-bezier(0.19, 1, 0.22, 1),
+      color 0.35s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+}
+
+.font-editorial {
+  font-family: var(--font-editorial);
+}
+
+.font-mono-index {
+  font-family: var(--font-mono);
+}
+
+.rule-b {
+  border-bottom: 1px solid var(--border-hairline);
+}
+
+.rule-t {
+  border-top: 1px solid var(--border-hairline);
+}
+
+.rule-all {
+  border: 1px solid var(--border-hairline);
+}
+
+/* Understated editorial link underline animation */
+.editorial-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.editorial-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background-color: currentColor;
+  transform: scaleX(0.35);
+  transform-origin: left center;
+  opacity: 0.45;
+  transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.3s ease;
+}
+
+.editorial-link:hover::after {
+  transform: scaleX(1);
+  opacity: 1;
+}
+
+/* Crisp custom scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-hairline);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--action-primary);
+}
